@@ -8,23 +8,17 @@
  */
 
 import {
-  GraphQLSchema as Schema,
   GraphQLObjectType as ObjectType,
+  // GraphQLString as StringType,
+  GraphQLInt as IntType,
+  // GraphQLNonNull as NonNull,
 } from 'graphql';
 
-import me from './queries/me';
-import news from './queries/news';
-import counter from './queries/counter';
-
-const schema = new Schema({
-  query: new ObjectType({
-    name: 'Query',
-    fields: {
-      me,
-      news,
-      counter,
-    },
-  }),
+const CounterItemType = new ObjectType({
+  name: 'CounterItem',
+  fields: {
+    value: { type: IntType },
+  },
 });
 
-export default schema;
+export default CounterItemType;

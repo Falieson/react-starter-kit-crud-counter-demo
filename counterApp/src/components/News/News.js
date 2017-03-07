@@ -9,10 +9,9 @@
 
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import Counter from '../../components/Counter';
 import s from './Home.css';
 
-class Home extends React.Component {
+class ReactJsNews extends React.Component {
   static propTypes = {
     news: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string.isRequired,
@@ -23,13 +22,21 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <Counter value={this.props.counterValue} />
-        </div>
+      <div>
+        <h1>React.js News</h1>
+        {this.props.news.map(item => (
+          <article key={item.link} className={s.newsItem}>
+            <h1 className={s.newsTitle}><a href={item.link}>{item.title}</a></h1>
+            <div
+              className={s.newsDesc}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: item.content }}
+            />
+          </article>
+        ))}
       </div>
     );
   }
 }
 
-export default withStyles(s)(Home);
+export default withStyles(s)(ReactJsNews);
