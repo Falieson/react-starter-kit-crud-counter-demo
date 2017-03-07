@@ -1,0 +1,25 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+cache:
+  directories:
+    - node_modules
+
+before_install:
+  - cp .env.example .env
+  - docker-compose up -d
+  - docker-compose logs -f api | while read line; do
+      echo $line;
+      [[ $line == *"server is listening"* ]] && pkill -f "docker-compose logs -f api";
+    done
+
+script:
+  - docker-compose exec api yarn lint
+  - docker-compose exec api yarn test
+
+after_script:
+  - docker-compose down
