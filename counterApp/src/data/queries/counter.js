@@ -12,7 +12,9 @@ import fetch from '../../core/fetch';
 import CounterItemType from '../types/CounterItemType';
 
 // local api server at localhost:5000/graphql
-const url = 'api/counter';
+
+const server = 'localhost:5000/graphql';
+const url = `${server}/api/counter`;
 
 let items = [];
 let lastFetchTask;
