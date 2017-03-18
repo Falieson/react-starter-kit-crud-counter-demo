@@ -12,7 +12,8 @@
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import Node from './types/Node';
 import ViewerType from './types/ViewerType';
-import CounterType from './types/CounterItemType';
+import CounterType from './types/CounterType';
+import Counter from './models/Counter'
 
 // In order to make it work with Relay 0.x, all the top-level
 // fields are placed inside the "viewer" field
@@ -20,7 +21,10 @@ export default new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'Query',
     fields: {
-      counter: CounterType,
+      counter: {
+       type:  CounterType,
+       resolve: (query) => Counter.findOne(query.id)
+      },
       node: Node.field,
       viewer: {
         type: ViewerType,

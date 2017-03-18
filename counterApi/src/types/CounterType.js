@@ -16,9 +16,12 @@ import {
 
 const CounterItemType = new ObjectType({
   name: 'CounterItem',
-  fields: {
-    value: { type: IntType },
-  },
+  fields: ()=> ({
+    amount: {
+      type: IntType,
+      resolve: (counter) => counter.amount
+    },
+  }),
 });
 
 export default CounterItemType;

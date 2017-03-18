@@ -25,4 +25,4 @@ class Counter {
   }
 }
 
-export default User;
+export default Counter;
